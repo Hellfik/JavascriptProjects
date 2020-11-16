@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Goldman', cursive;
+}
+
+body {
+    background-color: #16161a;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form {
+    background-color: #7f5af0;
+    max-width: 500px;
+    padding: 50px;
+    border: none;
+    border-radius: 20px;
+    /* box-shadow: 0px 0px 20px #fffffe; */
+}
+
+#form h2 {
+    color: #fffffe;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+input[type="number"] {
+    width: 50px;
+    padding-left: 5px;
+}
+
+.option {
+    width: 300px;
+    margin: 10px 0;
+}
+
+label {
+    color: #fffffe;
+}
+
+.option input {
+    float: right;
+}
+
+.option #result {
+    height: 30px;
+    background-color: #fffffe;
+    border-radius: 20px;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.appBtn {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+#generate {
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #fffffe;
+    box-shadow: 0px 0px 20px #000;
+}
