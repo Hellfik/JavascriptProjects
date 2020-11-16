@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    font-family: 'Goldman', cursive;
+    background-color: #232946;
+}
+
+.wrapper {
+    display: flex;
+    max-width: 500px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px #000;
+    padding: 50px 50px;
+}
+
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper h1 {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 100px;
+    color: #eebbc3;
+    font-size: 2em;
+}
+
+.wrapper h1:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #b8c1ec;
+}
+
+table {
+    border-collapse: collapse;
+    width: 400px;
+    height: 400px;
+}
+
+td {
+    border: 3px solid #eebbc3;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 50px;
+    color: #b8c1ec;
+}
+
+tr:nth-child(1) td {
+    border-top: none;
+}
+
+tr:nth-child(3) td {
+    border-bottom: none;
+}
+
+tr>td {
+    border-left: none;
+}
+
+tr td:last-child {
+    border-right: none;
+}
+
+#resetBtn {
+    margin: 50px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    background-color: #eebbc3;
+    font-size: 20px;
+    font-family: 'Goldman', cursive;
+    color: #232946;
+    cursor: pointer;
+}
+
+.scores {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.scores p {
+    color: #eebbc3;
+    font-size: 25px;
+}
+
+#modal {
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    background-color: #232946;
+    /* box-shadow: 0px 0px 10px #b8c1ec; */
+    z-index: 100000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#closeModal {
+    position: absolute;
+    color: #eebbc3;
+    font-size: 1.5em;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    cursor: pointer;
+}
+
+#darkBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+
+#winMessage {
+    font-size: 1.5em;
+    color: #eebbc3;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper h1 {
+        font-size: 1.5em;
+    }
+    table {
+        width: 300px;
+        height: 300px;
+    }
+    .scores {
+        flex-direction: column;
+    }
+    #modal {
+        width: 300px;
+        text-align: center;
+        padding: 0 20px;
+    }
+}

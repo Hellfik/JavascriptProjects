@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tic Tac Toe</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Tic Tac Toe GAME</h1>
+        <section>
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <button id="resetBtn" onclick="resetParty()">Reset Game</button>
+            <div class="scores">
+                <p>Player X : <span id="scoreX">0</span></p>
+                <p>Player O : <span id="scoreO">0</span></p>
+            </div>
+        </section>
+
+        <div id="modal">
+            <p id="closeModal">X</p>
+            <p id="winMessage"></p>
+        </div>
+        <div id="darkBackground">
+        </div>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+
+</html>
