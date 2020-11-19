@@ -6,12 +6,14 @@ const platformW = canvas.width;
 const platformH = 5;
 const holeSize = 30;
 let spaceBetween = 80;
-let interval = null;
+let interval = (scoreInterval = null);
 const canvasW = canvas.width;
 const canvasH = canvas.height;
 let ballX = canvas.width / 2;
-let ballY = 10;
+let ballY = 20;
 const radius = 10;
+let score = 0;
+
 
 let platforms = [{
     x: 0,
@@ -20,6 +22,7 @@ let platforms = [{
 }];
 
 let ball = { x: ballX, y: ballY, ballDropSpeed: 7 };
+
 
 drawPlateform();
 movePlatform();
@@ -33,12 +36,14 @@ function drawPlateform() {
         ctx.fillStyle = "black";
         ctx.fill();
         ctx.closePath();
-
+        //Draw the hole for each platforms
         ctx.beginPath();
         ctx.rect(platform.holeX, platform.y, holeSize, platformH);
+
         ctx.fillStyle = "#fff";
         ctx.fill();
         ctx.closePath();
+
     });
 }
 
@@ -53,21 +58,25 @@ function addPlatforms() {
 }
 
 function movePlatform() {
+    scoreInterval = setInterval(() => {
+        score++;
+    }, 1000);
     interval = setInterval(() => {
-        dropBall();
+        gameOver();
+        dropBall(detectCollision());
         addPlatforms();
-        detectCollision();
         platforms.forEach(platform => {
             if (platform.y + platformH < 0) {
                 platforms.shift();
             }
-            platform.y -= 1;
+            platform.y -= 2;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawPlateform();
             drawBall();
+            drawScore();
         });
 
-    }, 20);
+    }, 18);
 }
 
 function drawBall() {
@@ -80,38 +89,60 @@ function drawBall() {
 
 function moveBall() {
     document.addEventListener('keydown', function(e) {
-        if (e.key === "ArrowRight") {
+        if (e.key === "ArrowRight" && ball.x + radius < canvasW) {
             ball.x += 10;
         }
-        if (e.key === "ArrowLeft") {
+        if (e.key === "ArrowLeft" && ball.x - radius > 0) {
             ball.x -= 10;
-        }
-        if (e.key === "ArrowDown") {
-            ball.y += 10;
-        }
-        if (e.key === "ArrowUp") {
-            ball.y -= 10;
         }
     });
 }
 
 function detectCollision() {
-    platforms.forEach(plateform => {
-        if (ball.y - radius > 0 && ball.y < plateform.y) {
-            if (plateform.holeX <= ball.x && ball.x <= plateform.holeX + holeSize) {
-                return;
-            } else if (plateform.y < ball.y + radius) {
-                ball.y = plateform.y - radius;
-                console.log(ball.y, plateform.y);
-            }
-        };
-    });
+    const closestPlatform = platforms.find(
+        (platform) => platform.y > ball.y);
+    return closestPlatform;
+
 }
 
-function dropBall() {
-    if (ball.y < platforms[0].y - radius) {
-        ball.y += ball.ballDropSpeed;
+function dropBall(closestPl) {
+    if (closestPl) {
+        if (ball.y < closestPl.y - radius || (ball.x > closestPl.holeX && ball.x < (closestPl.holeX + holeSize))) {
+            ball.y += ball.ballDropSpeed;
+        } else {
+            ball.y = closestPl.y - radius;
+        }
     } else {
-        ball.y = platforms[0].y - radius;
+        ball.y = canvasH - radius;
     }
+}
+
+function gameOver() {
+    if (ball.y - radius < 0) {
+        alert('Game Over');
+        resetGame();
+    }
+}
+
+function resetGame() {
+    ball.x = canvas.width / 2;
+    ball.y = 20;
+    platforms = [{
+        x: 0,
+        y: 400,
+        holeX: Math.floor(Math.random() * ((canvas.width - holeSize))),
+    }];
+    clearInterval(interval);
+    clearInterval(scoreInterval);
+    interval = scoreInterval = null;
+    score = 0;
+    movePlatform();
+}
+
+function drawScore() {
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.fill();
+    ctx.fillText('Score: ' + score, 10, 10);
+    ctx.closePath();
 }
